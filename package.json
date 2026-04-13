@@ -13,14 +13,17 @@
     "@libsql/client": "^0.17.2",
     "bcrypt": "^6.0.0",
     "drizzle-orm": "^0.45.1",
+    "jsonwebtoken": "^9.0.3",
     "nuxt": "^4.4.2",
     "nuxt-auth-utils": "^0.5.29",
+    "nuxt-security": "^2.5.1",
     "vue": "^3.5.30",
     "vue-router": "^5.0.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/bcrypt": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "drizzle-kit": "^0.31.10"
   }
 }
