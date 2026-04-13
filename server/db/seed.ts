@@ -4,9 +4,6 @@ import {
   users,
   product_types,
   products,
-  order_statuses,
-  orders,
-  order_items,
 } from "./schema";
 import { hash } from "bcrypt"; // Utilitzarem bcrypt per encriptar la contrasenya
 
@@ -14,13 +11,10 @@ async function seed() {
   try {
     console.log("🍹 Començant el seeder de La Cocteleria...");
     
-    // 1. Netejar taules existents
+    // 1. Netejar taules existents (Només les que queden)
     console.log("🗑️ Netejant la base de dades...");
-    await db.delete(order_items);
-    await db.delete(orders);
     await db.delete(products);
     await db.delete(product_types);
-    await db.delete(order_statuses);
     await db.delete(users);
 
     console.log("✨ Base de dades neta.");
@@ -37,22 +31,7 @@ async function seed() {
       .returning();
     console.log(`✅ ${insertedProductTypes.length} categories inserides.`);
 
-    // 3. Inserir estats de comanda (Per a la barra)
-    console.log("🛎️ Inserint estats de les comandes...");
-    const orderStatusesData = [
-      { name: "Pendent" },        // Acabat de demanar
-      { name: "Preparant" },      // El bàrman hi està treballant
-      { name: "Servit" },         // Entregat a taula
-      { name: "Cobrat" },         // Compte pagat
-      { name: "Cancel·lat" },     // Comanda anul·lada
-    ];
-    const insertedOrderStatuses = await db
-      .insert(order_statuses)
-      .values(orderStatusesData)
-      .returning();
-    console.log(`✅ ${insertedOrderStatuses.length} estats inserits.`);
-
-    // 4. Inserir usuaris (Clients / Staff)
+    // 3. Inserir usuaris (Clients / Staff)
     console.log("👤 Inserint usuaris...");
     const hashedPassword = await hash("12345678", 10);
     const usersData = [
@@ -61,18 +40,20 @@ async function seed() {
         email: "silvia.serra@gmail.com",
         login: "silvia.serra",
         password: hashedPassword,
+        isAdmin: false, // Usuari normal
       },
       {
         name: "Administrador",
-        email: "admin@mail.com", // L'email que vas demanar
+        email: "admin@mail.com",
         login: "admin",
-        password: hashedPassword, // '12345678'
+        password: hashedPassword,
+        isAdmin: true, // Li donem permisos d'edició
       },
     ];
     const insertedUsers = await db.insert(users).values(usersData).returning();
     console.log(`✅ ${insertedUsers.length} usuaris inserits.`);
 
-// 5. Inserir els Còctels (Productes) amb imatges
+    // 4. Inserir els Còctels (Productes) amb imatges
     console.log("🍸 Inserint la carta de còctels amb imatges...");
     const productsData = [
       // --- AMB ALCOHOL (insertedProductTypes[0]) ---
@@ -166,7 +147,7 @@ async function seed() {
       .returning();
     console.log(`✅ ${insertedProducts.length} begudes inserides (Alcohol/Sense Alcohol).`);
 
-    console.log(" Seeder completat amb èxit! La barra està oberta.");
+    console.log("🍹 Seeder completat amb èxit! La barra està oberta.");
   } catch (error) {
     console.error("❌ Error durant el seeder:", error);
     process.exit(1);

@@ -1,21 +1,23 @@
 import { sqliteTable, text, integer, real } from "drizzle-orm/sqlite-core";
 import { relations } from "drizzle-orm";
 
+// 1. Usuarios (con campo isAdmin para el control de permisos)
 export const users = sqliteTable("users", {
   id: integer("id").primaryKey(),
   name: text("name"),
   email: text("email").notNull(),
   login: text("login"),
   password: text("password"),
+  isAdmin: integer("is_admin", { mode: "boolean" }).default(false),
 });
 
-/* Tabla para las categorías de la carta (ej. Cócteles Clásicos, Sin Alcohol, Cervezas) */
+// 2. Categorías
 export const product_types = sqliteTable("product_types", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
 });
 
-/* Tabla para los CÓCTELES y bebidas de la carta */
+// 3. Productos (con la referencia a type_id restaurada)
 export const products = sqliteTable("products", {
   id: integer("id").primaryKey(),
   name: text("name").notNull(),
@@ -26,40 +28,9 @@ export const products = sqliteTable("products", {
   image: text("image"), 
 });
 
-/* Tabla para los estados de los pedidos (ej. "Pendiente", "Preparando", "Servido") */
-export const order_statuses = sqliteTable("order_statuses", {
-  id: integer("id").primaryKey(),
-  name: text("name").notNull(),
-});
+// --- Relaciones ---
 
-/* Tabla para los pedidos de las mesas/clientes */
-export const orders = sqliteTable("orders", {
-  id: integer("id").primaryKey(),
-  
-  // FOREIGN KEY: Enlaza el pedido con el cliente que lo hizo
-  user_id: integer("user_id").references(() => users.id),
-  
-  order_date: integer("order_date", { mode: 'timestamp' }).notNull(),
-  
-  // FOREIGN KEY: Enlaza el pedido con su estado actual
-  status_id: integer("status_id").references(() => order_statuses.id),
-});
-
-/* Tabla para los artículos de un pedido (la comanda) */
-export const order_items = sqliteTable("order_items", {
-  id: integer("id").primaryKey(),
-  
-  // FOREIGN KEY: Enlaza este artículo con la factura/pedido al que pertenece
-  order_id: integer("order_id").references(() => orders.id),
-  
-  // FOREIGN KEY: Enlaza este artículo con el cóctel que se está pidiendo
-  product_id: integer("product_id").references(() => products.id),
-  
-  quantity: integer("quantity").notNull().default(1),
-});
-
-// --- Definición de relaciones (Para consultas con Prisma-like sintaxis) ---
-
+// Mantenemos la relación para poder hacer queries tipo "obtener producto con su categoría"
 export const productRelations = relations(products, ({ one }) => ({
   type: one(product_types, {
     fields: [products.type_id],
@@ -67,29 +38,7 @@ export const productRelations = relations(products, ({ one }) => ({
   }),
 }));
 
-export const orderRelations = relations(orders, ({ one, many }) => ({
-  user: one(users, {
-    fields: [orders.user_id],
-    references: [users.id],
-  }),
-  status: one(order_statuses, {
-    fields: [orders.status_id],
-    references: [order_statuses.id],
-  }),
-  items: many(order_items),
-}));
-
-export const orderItemRelations = relations(order_items, ({ one }) => ({
-  order: one(orders, {
-    fields: [order_items.order_id],
-    references: [orders.id],
-  }),
-  product: one(products, {
-    fields: [order_items.product_id],
-    references: [products.id],
-  }),
-}));
-
-export const userRelations = relations(users, ({ many }) => ({
-  orders: many(orders),
+// Relación inversa (opcional, para sacar todos los productos de una categoría)
+export const productTypeRelations = relations(product_types, ({ many }) => ({
+  products: many(products),
 }));
