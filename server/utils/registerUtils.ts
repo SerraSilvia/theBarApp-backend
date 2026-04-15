@@ -1,6 +1,10 @@
 import { eq } from "drizzle-orm";
+import { db } from "../db";
+import * as schema from "../db/schema";
+
+
 export async function throwIfUserExists(email: string) {
-  const existingUser = await useDb().query.users.findFirst({
+  const existingUser = await db.query.users.findFirst({
     where: eq(schema.users.email, email),
   });
 
@@ -17,7 +21,7 @@ export async function registerUser(
   name: string,
   password: string
 ) {
-  const result = await useDb()
+  const result = await db
     .insert(schema.users)
     .values({
       name,
