@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "../db";
 import * as schema from "../db/schema";
-
+import { hash } from "bcrypt"; // 1. Importar 'hash' desde bcrypt
 
 export async function throwIfUserExists(email: string) {
   const existingUser = await db.query.users.findFirst({
@@ -26,7 +26,7 @@ export async function registerUser(
     .values({
       name,
       email,
-      password: await hashPassword(password),
+      password: await hash(password, 10), // 2. Usar 'hash' para encriptar la contraseña
       login: email,
     })
     .returning();
