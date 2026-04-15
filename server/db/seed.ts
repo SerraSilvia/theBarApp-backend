@@ -79,7 +79,7 @@ async function seed() {
         price: 9.00,
         description: "L'equilibri perfecte entre el rom i la dolçor natural de la maduixa fresca.",
         ingredients: "Rom blanc, maduixes fresques, suc de llima, xarop de sucre, gel picat.",
-        image: "https://www.thecocktaildb.com/images/media/drink/mrz9jt1504361818.jpg"
+        image: "https://i.blogs.es/e68dba/bu-fitia/500_333.jpeg"
       },
       {
         name: "Pinya Colada",
@@ -87,7 +87,7 @@ async function seed() {
         price: 9.50,
         description: "Un viatge tropical a cada glop. Cremós, dolç i molt refrescant.",
         ingredients: "Rom blanc, crema de coco, suc de pinya, gel.",
-        image: "https://www.thecocktaildb.com/images/media/drink/v0at4y1582483090.jpg"
+        image: "https://cdn7.kiwilimon.com/brightcove/11049/640x640/11049.jpg.webp"
       },
       {
         name: "Bloody Mary",
@@ -95,7 +95,7 @@ async function seed() {
         price: 10.00,
         description: "El rei dels còctels salats. Picant, especiat i amb molt de caràcter.",
         ingredients: "Vodka, suc de tomàquet, suc de llimona, salsa Worcestershire, Tabasco, sal d'api.",
-        image: "https://www.thecocktaildb.com/images/media/drink/t60z9p1504353589.jpg"
+        image: "https://olmecaaltos.com/wp-content/uploads/cocktail-images/recipe-bloody-mary-cocktail.webp"
       },
       {
         name: "Blue Lagoon",
@@ -103,7 +103,7 @@ async function seed() {
         price: 8.50,
         description: "Un còctel vibrant i elèctric amb un toc cítric inconfusible.",
         ingredients: "Vodka, Blue Curaçao, llimonada, gel.",
-        image: "https://www.thecocktaildb.com/images/media/drink/68syid1550905132.jpg"
+        image: "https://i0.wp.com/vintageamericancocktails.com/wp-content/uploads/2022/04/blue_lagoon.jpg?resize=500%2C500&ssl=1"
       },
       {
         name: "The Bar Special",
@@ -111,7 +111,7 @@ async function seed() {
         price: 12.00,
         description: "La nostra creació secreta d'autor. Cítric, floral i fumat.",
         ingredients: "Ginebra prèmium, xarop de violeta, clara d'ou, suc de yuzu, romaní fumat.",
-        image: "https://www.thecocktaildb.com/images/media/drink/71t8581504353095.jpg"
+        image: "https://res.cloudinary.com/jerrick/image/upload/v1559938825/tmf25v1pawqmgligq2qe.jpg"
       },
 
       // --- SENSE ALCOHOL (insertedProductTypes[1]) ---
@@ -121,7 +121,7 @@ async function seed() {
         price: 7.00,
         description: "Un clàssic sense alcohol, dolç i molt afruitat.",
         ingredients: "Suc de taronja, llimona, pinya, préssec i granadina.",
-        image: "https://www.thecocktaildb.com/images/media/drink/szmj2d1504889961.jpg"
+        image: "https://cdn.shopify.com/s/files/1/0697/9728/2057/files/virginsanfrancisco_480x480.png?v=1730733009"
       },
       {
         name: "Shirley Temple",
@@ -129,7 +129,7 @@ async function seed() {
         price: 6.50,
         description: "El mocktail més famós del món. Bombolles i un toc dolç.",
         ingredients: "Ginger ale, un raig de granadina, cirera confitada.",
-        image: "https://www.thecocktaildb.com/images/media/drink/u7a6df1441246184.jpg"
+        image: "https://umamigirl.com/wp-content/uploads/2021/06/Sour-Cherry-Shirley-Temple-Umami-Girl-1200-3-600x600.jpg"
       },
       {
         name: "Mojito Sense Alcohol",
@@ -137,7 +137,7 @@ async function seed() {
         price: 7.50,
         description: "Tota la frescor del mojito tradicional però apte per a tothom.",
         ingredients: "Llima fresca, menta, sucre morè, Sprite, gel picat.",
-        image: "https://www.thecocktaildb.com/images/media/drink/wywvxq1441246182.jpg"
+        image: "https://www.finedininglovers.es/sites/default/files/styles/1_1_768x768/public/recipe_content_images/Mojito%20sin%20alcohol_analcolico.jpg.webp?itok=DghPcmRu"
       }
     ];
     

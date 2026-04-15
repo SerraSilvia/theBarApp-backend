@@ -2,6 +2,7 @@ import { eq } from 'drizzle-orm'
 import jwt from 'jsonwebtoken'
 import { db } from '../../db'
 import * as schema from '../../db/schema'
+import { compareHash } from '../../utils'
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event)
