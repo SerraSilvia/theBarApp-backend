@@ -7,12 +7,15 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:seed": "tsx server/db/seed.ts"
   },
   "dependencies": {
     "@libsql/client": "^0.17.2",
     "bcrypt": "^6.0.0",
-    "drizzle-orm": "^0.45.1",
+    "drizzle-orm": "^0.45.2",
     "jsonwebtoken": "^9.0.3",
     "nuxt": "^4.4.2",
     "nuxt-auth-utils": "^0.5.29",

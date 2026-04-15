@@ -3,7 +3,7 @@ import { relations } from "drizzle-orm";
 
 // 1. Usuarios (con campo isAdmin para el control de permisos)
 export const users = sqliteTable("users", {
-  id: integer("id").primaryKey(),
+  id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name"),
   email: text("email").notNull(),
   login: text("login"),
@@ -19,7 +19,7 @@ export const product_types = sqliteTable("product_types", {
 
 // 3. Productos (con la referencia a type_id restaurada)
 export const products = sqliteTable("products", {
-  id: integer("id").primaryKey(),
+  id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
   type_id: integer("type_id").references(() => product_types.id),
   price: real("price").notNull(),

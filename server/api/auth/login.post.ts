@@ -45,7 +45,7 @@ export default defineEventHandler(async (event) => {
 
   const { password: _, ...userWithoutPassword } = existingUser
 
-  const token = jwt.sign({ id: userWithoutPassword.id }, config.jwtSecret, {
+  const token = jwt.sign(userWithoutPassword, config.jwtSecret, {
     expiresIn: '1h', // El token expirará en 1 hora
   })
 
