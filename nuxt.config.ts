@@ -24,8 +24,10 @@ export default defineNuxtConfig({
       },
     },
     corsHandler: {
-      origin: process.env.NODE_ENV === 'development' ? '*' : 'YOUR_PRODUCTION_DOMAIN',
-      methods: ['GET', 'POST', 'PUT', 'DELETE'],
+      origin: 'http://localhost:9000',
+      methods: '*',
+      allowHeaders: '*',
+      exposeHeaders: '*'
     },
   },
 })

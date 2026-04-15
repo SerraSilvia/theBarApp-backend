@@ -2,9 +2,13 @@ import { H3Event } from 'h3'
 import { deleteProduct } from '../../db/queries'
 
 export default defineEventHandler(async (event: H3Event) => {
-  const user = event.context.user
-  if (!user?.isAdmin) {
-    throw createError({ statusCode: 401, statusMessage: 'No autorizado' })
+  const session = await getUserSession(event);
+
+  if (!session.user || session.user.isAdmin !== true) {
+    throw createError({ 
+      statusCode: 401, 
+      message: 'No autorizado. Se requieren permisos de administrador.' 
+    });
   }
 
   const productId = Number(event.context.params?.id)
